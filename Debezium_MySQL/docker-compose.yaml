@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  mysql:
+    image: quay.io/debezium/example-mysql
+    container_name: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=debezium
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqlpw
+    volumes:
+      - mysqldatavolume:/var/lib/mysql
+  debezium-server:
+    image: quay.io/debezium/server
+    container_name: debezium-server
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /tmp/credentials/service-account.json
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./demo-sa.json:/tmp/credentials/service-account.json
+      - ./conf:/debezium/conf
+    depends_on:
+      - mysql
+    restart: "always"
+
+volumes:
+  mysqldatavolume:
