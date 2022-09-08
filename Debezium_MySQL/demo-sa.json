@@ -1,0 +1,2 @@
+Cole aqui os dados da conta de serviço da GCP criada. Essa conta precisa ter as permissões de escrita no BigQuery e do Pub/Sub.
+No caso mais geral, dê 'BigQuery Admin' e 'Pub/Sub Admin' para a conta de serviço que vai funcionar. Depois exporte as credenciais em formato .json e substitua este arquivo pelo arquivo com a chave, mantendo o nome do arquivo.
